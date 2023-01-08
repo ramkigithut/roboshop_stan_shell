@@ -10,7 +10,7 @@ rm -rf /app/*
 cd /app
 unzip /tmp/catalogue.zip
 cd /app
-npm install
+npm install -g npm@9.2.0
 
 cp ${conf_file_location}/files/catalogue.service /etc/systemd/system/catalogue.service
 systemctl daemon-reload
