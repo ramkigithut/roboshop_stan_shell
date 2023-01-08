@@ -10,4 +10,4 @@ unzip /tmp/frontend.zip
 cp files/nginx-server-roboshop.conf /etc/nginx/default.d/roboshop.conf
 
 
-systemctl restart nginx
+systemctl restart nginX
