@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+pwd
+
+exit
 yum install nginx -y
 systemctl enable nginx
 systemctl start nginx
