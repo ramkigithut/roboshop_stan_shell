@@ -11,7 +11,7 @@ rm -rf /usr/share/nginx/html/* &>>${log}
 echo $?
 
 echo -e "\e[35m Download Frontend Content\e[0m"
-curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
+curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip &>>${log}
 cd /usr/share/nginx/html &>>${log}
 echo $?
 
