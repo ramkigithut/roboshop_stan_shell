@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ##### Change these values ###
 ZONE_ID="Z09629721UPT9JG3GJST8"
