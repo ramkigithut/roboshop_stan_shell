@@ -8,6 +8,7 @@ if [ $? -eq 0 ]; then
   echo success
 else
   echo failure
+exit
 fi
 
 echo -e "\e[35m Install nodejs\e[0m"
@@ -16,6 +17,7 @@ if [ $? -eq 0 ]; then
   echo success
 else
   echo failure
+exit
 fi
 
 echo -e "\e[35m Add Application user\e[0m"
@@ -24,6 +26,7 @@ if [ $? -eq 0 ]; then
   echo success
 else
   echo failure
+exit
 fi
 
 mkdir -p /app &>>${log}
@@ -34,6 +37,7 @@ if [ $? -eq 0 ]; then
   echo success
 else
   echo failure
+exit
 fi
 
 echo -e "\e[35m Cleanup Old Content\e[0m"
@@ -42,6 +46,7 @@ if [ $? -eq 0 ]; then
   echo success
 else
   echo failure
+exit
 fi
 
 echo -e "\e[35m CleaExtracting App Content\e[0m"
@@ -51,6 +56,7 @@ if [ $? -eq 0 ]; then
   echo success
 else
   echo failure
+exit
 fi
 
 echo -e "\e[35m Installing nodejs Dependencies\e[0m"
@@ -60,6 +66,7 @@ if [ $? -eq 0 ]; then
   echo success
 else
   echo failure
+exit
 fi
 
 echo -e "\e[35m Configuring catalogue service file\e[0m"
@@ -68,6 +75,7 @@ if [ $? -eq 0 ]; then
   echo success
 else
   echo failure
+exit
 fi
 
 echo -e "\e[35m Reload SystemD\e[0m"
@@ -76,6 +84,7 @@ if [ $? -eq 0 ]; then
   echo success
 else
   echo failure
+exit
 fi
 
 echo -e "\e[35m Enable catalogue service\e[0m"
@@ -84,6 +93,7 @@ if [ $? -eq 0 ]; then
   echo success
 else
   echo failure
+exit
 fi
 
 
@@ -93,6 +103,7 @@ if [ $? -eq 0 ]; then
   echo success
 else
   echo failure
+exit
 fi
 
 echo -e "\e[35m Configuring mongo repos\e[0m"
@@ -101,6 +112,7 @@ if [ $? -eq 0 ]; then
   echo success
 else
   echo failure
+exit
 fi
 
 echo -e "\e[35m Installing mongo client\e[0m"
@@ -109,6 +121,7 @@ if [ $? -eq 0 ]; then
   echo success
 else
   echo failure
+exit
 fi
 
 echo -e "\e[35m load schema\e[0m"
@@ -117,4 +130,5 @@ if [ $? -eq 0 ]; then
   echo success
 else
   echo failure
+exit
 fi
