@@ -11,3 +11,7 @@ status_check() {
     exit
   fi
 }
+
+print_head() {
+  echo -e "\e[1" \e[om"
+}
