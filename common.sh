@@ -13,5 +13,5 @@ status_check() {
 }
 
 print_head() {
-  echo -e "\e[1; \e[0m"
+  echo -e "\e[1; $1 \e[0m"
   }
