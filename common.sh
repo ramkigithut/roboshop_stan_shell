@@ -42,22 +42,8 @@ app_prerequisites() {
 
 }
 
-NODEJS() {
+systemd_setup() {
 
-  print_head "Configuring nodejs repos"
-  curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${log}
-  status_check
-
-  print_head "Install nodejs"
-  yum install nodejs -y &>>${log}
-  status_check
-
-  app_prerequisites
-
-  print_head "Installing nodejs Dependencies"
-  cd /app &>>${log}
-  npm install &>>${log}
-  status_check
 
   print_head "Configuring ${component} service file"
   cp ${conf_file_location}/files/${component}.service /etc/systemd/system/${component}.service &>>${log}
@@ -77,6 +63,27 @@ NODEJS() {
   systemctl start ${component} &>>${log}
   status_check
 
+
+}
+
+NODEJS() {
+
+  print_head "Configuring nodejs repos"
+  curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${log}
+  status_check
+
+  print_head "Install nodejs"
+  yum install nodejs -y &>>${log}
+  status_check
+
+  app_prerequisites
+
+  print_head "Installing nodejs Dependencies"
+  cd /app &>>${log}
+  npm install &>>${log}
+  status_check
+
+  systemd_setup
 
   if [ ${schema_load} == "true" ]; then
 
@@ -109,5 +116,7 @@ MAVEN() {
   print_head "Copy App file to APP Location"
   mv target/${component}-1.0.jar shipping.jar
   status_check
+
+  systemd_setup
 
 }
