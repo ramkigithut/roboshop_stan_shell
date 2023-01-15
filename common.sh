@@ -88,7 +88,7 @@ NODEJS() {
   fi
 }
 
-MAVEN(){
+MAVEN() {
 
   print_head "Install Maven"
   yum install maven -y &>>${log}
