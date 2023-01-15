@@ -2,7 +2,7 @@
 
 source common.sh
 
-if [ -z "${root_mysql_passwrd}" ]; then
+if [ -z "${root_mysql_password}" ]; then
   echo "Variable root_mysql_password is missing"
   exit
 fi
@@ -30,6 +30,6 @@ systemctl start mysqld &>>${log}
 status_check
 
 print_head "Reset Default Database password"
-mysql_secure_installation --set-root-pass ${root_mysql_passwrd} &>>${log}
+mysql_secure_installation --set-root-pass ${root_mysql_password} &>>${log}
 status_check
 
