@@ -70,15 +70,20 @@ print_head() {
     systemctl start ${component} &>>${log}
     status_check
 
-    print_head "Configuring mongo repos"
-    cp ${conf_file_location}/files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${log}
-    status_check
 
-    print_head "Installing mongo client"
-    yum install mongodb-org-shell -y &>>${log}
-    status_check
+    if [ ${schema_load} == "true" ]; then
 
-    print_head "load schema"
-    mongo --host mongodb-dev.practicaldevops.online </app/schema/${component}.js &>>${log}
-    status_check
+      print_head "Configuring mongo repos"
+      cp ${conf_file_location}/files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${log}
+      status_check
+
+      print_head "Installing mongo client"
+      yum install mongodb-org-shell -y &>>${log}
+      status_check
+
+      print_head "load schema"
+      mongo --host mongodb-dev.practicaldevops.online </app/schema/${component}.js &>>${log}
+      status_check
+    fi
+
   }
