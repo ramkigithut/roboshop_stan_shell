@@ -14,17 +14,9 @@ status_check() {
 
 print_head() {
   echo -e "\e[1; $1 \e[0m"
-  }
+}
 
-NODEJS() {
-
-  print_head "Configuring nodejs repos"
-  curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${log}
-  status_check
-
-  print_head "Install nodejs"
-  yum install nodejs -y &>>${log}
-  status_check
+app_prerequisites() {
 
   print_head "Add Application user"
   id roboshop &>>${log}
@@ -48,12 +40,26 @@ NODEJS() {
   unzip /tmp/${component}.zip &>>${log}
   status_check
 
+}
+
+NODEJS() {
+
+  print_head "Configuring nodejs repos"
+  curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${log}
+  status_check
+
+  print_head "Install nodejs"
+  yum install nodejs -y &>>${log}
+  status_check
+
+  app_prerequisites
+
   print_head "Installing nodejs Dependencies"
   cd /app &>>${log}
   npm install &>>${log}
   status_check
 
-  print_head "Configuring catalogue service file"
+  print_head "Configuring ${component} service file"
   cp ${conf_file_location}/files/${component}.service /etc/systemd/system/${component}.service &>>${log}
   status_check
 
@@ -93,5 +99,7 @@ MAVEN() {
   print_head "Install Maven"
   yum install maven -y &>>${log}
   status_check
+
+  app_prerequisites
 
 }
