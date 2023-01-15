@@ -102,4 +102,12 @@ MAVEN() {
 
   app_prerequisites
 
+  print_head "Build a Package"
+  mvn clean package
+  status_check
+
+  print_head "Copy App file to APP Location"
+  mv target/${component}-1.0.jar shipping.jar
+  status_check
+
 }
