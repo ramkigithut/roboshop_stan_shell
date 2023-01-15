@@ -2,22 +2,26 @@
 
 source common.sh
 
-print_head "Copy MongoDB Repo file"
-cp ${conf_fie_location}/files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${log}
+print_head "installing redis Repo file"
+yum install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y &>>${log}
 status_check
 
-print_head "Install MongoDB"
-yum install mongodb-org -y &>>${log}
+print_head "Enabling redis 6.2 dnf module "
+dnf module enable redis:remi-6.2 -y &>>${log}
 status_check
 
-print_head "update MongoDB listen address"
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>${log}
+print_head "Installing redis"
+yum install redis -y  &>>${log}
 status_check
 
-print_head "Enable MongoDB"
-systemctl enable mongod &>>${log}
+print_head "update redis listen address"
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf /etc/redis/redis.conf &>>${log}
 status_check
 
-print_head "start MongoDB"
-systemctl start mongod &>>${log}
+print_head "Enable redis service"
+systemctl enable redis &>>${log}
+status_check
+
+print_head "start redis"
+systemctl start redis &>>${log}
 status_check
