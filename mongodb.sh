@@ -1,10 +1,23 @@
 #!/usr/bin/env bash
-conf_fie_location=$(pwd)
-cp ${conf_fie_location}/files/mongodb.repo /etc/yum.repos.d/mongodb.repo
 
-yum install mongodb-org -y
+source common.sh
 
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+print_head "Copy MongoDB Repo file"
+cp ${conf_fie_location}/files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${log}
+status_check
 
-systemctl enable mongod
-systemctl start mongod
+print_head "Install MongoDB"
+yum install mongodb-org -y &>>${log}
+status_check
+
+print_head "update MongoDB listen address"
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>${log}
+status_check
+
+print_head "Enable MongoDB"
+systemctl enable mongod &>>${log}
+status_check
+
+print_head "start MongoDB"
+systemctl start mongod &>>${log}
+status_check
