@@ -87,3 +87,7 @@ print_head() {
     fi
 
   }
+
+  MAVEN(){
+
+  }
