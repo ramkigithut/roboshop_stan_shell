@@ -32,7 +32,7 @@ status_check
 
 print_head "Installing nodejs Dependencies"
 cd /app &>>${log}
-npm install -g npm@9.2.0 &>>${log}
+npm install &>>${log}
 status_check
 
 print_head "Configuring catalogue service file"
