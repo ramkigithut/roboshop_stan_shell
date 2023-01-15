@@ -66,6 +66,23 @@ systemd_setup() {
 
 }
 
+load_schema() {
+
+  if [ ${schema_load} == "true" ]; then
+    print_head "Configuring mongo repos"
+    cp ${conf_file_location}/files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${log}
+    status_check
+
+    print_head "Installing mongo client"
+    yum install mongodb-org-shell -y &>>${log}
+    status_check
+
+    print_head "load schema"
+    mongo --host mongodb-dev.practicaldevops.online </app/schema/${component}.js &>>${log}
+    status_check
+  fi
+}
+
 NODEJS() {
 
   print_head "Configuring nodejs repos"
@@ -85,20 +102,8 @@ NODEJS() {
 
   systemd_setup
 
-  if [ ${schema_load} == "true" ]; then
+  load_schema
 
-    print_head "Configuring mongo repos"
-    cp ${conf_file_location}/files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${log}
-    status_check
-
-    print_head "Installing mongo client"
-    yum install mongodb-org-shell -y &>>${log}
-    status_check
-
-    print_head "load schema"
-    mongo --host mongodb-dev.practicaldevops.online </app/schema/${component}.js &>>${log}
-    status_check
-  fi
 }
 
 MAVEN() {
@@ -118,5 +123,7 @@ MAVEN() {
   status_check
 
   systemd_setup
+
+  load_schema
 
 }
