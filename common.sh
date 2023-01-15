@@ -62,7 +62,7 @@ print_head() {
 
 
     print_head "Enable ${component} service"
-    systemctl enable e${component} &>>${log}
+    systemctl enable ${component} &>>${log}
     status_check
 
 
