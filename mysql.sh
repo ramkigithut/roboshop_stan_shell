@@ -2,6 +2,12 @@
 
 source common.sh
 
+if [ -z "${root_mysql_passwrd}" ]; then
+  echo "Variable root_mysql_password is missing"
+  exit
+fi
+
+
 print_head "Disabling Default Module MySQL 8 Version"
 dnf module disable mysql -y &>>${log}
 status_check
@@ -21,4 +27,8 @@ status_check
 
 print_head "start MySQL"
 systemctl start mysqld &>>${log}
+status_check
+
+print_head "Reset Default Database password"
+mysql_secure_installation --set-root-pass ${root_mysql_passwrd} &>>${log}
 status_check
