@@ -27,7 +27,10 @@ status_check
 
 
 print_head "Add application User"
-rabbitmqctl add_user roboshop ${roboshop_rabbitmq_password} &>>${log}
+rabbitmqctl list_user | grep roboshop &>>${log}
+if [ $? -ne 0 ]; then
+  rabbitmqctl add_user roboshop ${roboshop_rabbitmq_password} &>>${log}
+fi
 status_check
 
 print_head "Add Tags to application User "
