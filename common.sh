@@ -139,7 +139,7 @@ MAVEN() {
 
 }
 
-PYTHON(){
+PYTHON() {
 
   print_head "Install Python"
   yum install python36 gcc python3-devel -y &>>${log}
@@ -152,8 +152,10 @@ PYTHON(){
   pip3.6 install -r requirements.txt
   status_check
 
-  systemd_setup
+  print_head "Update Passwords in Service File"
+  sed -i -e "s/roboshop_rabbitmq_password/${roboshop_rabbitmq_password}/" files/${component}.service &>>${log}
+  status_check
 
-  load_schema
+  systemd_setup
 
 }
