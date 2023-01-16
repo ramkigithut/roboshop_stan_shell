@@ -1,6 +1,6 @@
 source common.sh
 
-if [ -z "${roboshop_rabbitmq_password}" ]; then
+if [ -z "${robo_rabbitmq_password}" ]; then
   echo "Variable roboshop_rabbitmq_password is missing"
   exit
 fi
@@ -27,7 +27,7 @@ status_check
 
 
 print_head "Add application User"
-rabbitmqctl add_user roboshop ${roboshop_rabbitmq_password} &>>${log}
+rabbitmqctl add_user roboshop ${robo_rabbitmq_password} &>>${log}
 status_check
 
 print_head "Add Tags to application User "
