@@ -175,6 +175,10 @@ GOLANG() {
    go build &>>${log}
    status_check
 
+   print_head "Update Passwords in Service File"
+   sed -i -e "s/roboshop_rabbitmq_password/${roboshop_rabbitmq_password}/" ${conf_file_location}/files/${component}.service &>>${log}
+   status_check
+
    systemd_setup
 
 }
