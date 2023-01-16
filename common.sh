@@ -67,7 +67,7 @@ systemd_setup() {
 }
 
 load_schema() {
-  if [ ${schema_load} == "true"]; then
+  if [ ${schema_load} == "true" ]; then
     if [ ${schema_type} == "mongo" ]; then
       print_head "Configuring mongo repos"
       cp ${conf_file_location}/files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${log}
