@@ -68,18 +68,31 @@ systemd_setup() {
 
 load_schema() {
 
-  if [ ${schema_load} == "true" ]; then
-    print_head "Configuring mongo repos"
-    cp ${conf_file_location}/files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${log}
-    status_check
+  if [ ${schema_load} == "true"]; then
 
-    print_head "Installing mongo client"
-    yum install mongodb-org-shell -y &>>${log}
-    status_check
+    if [ ${schema_type} == "mongo" ]; then
+      print_head "Configuring mongo repos"
+      cp ${conf_file_location}/files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${log}
+      status_check
 
-    print_head "load schema"
-    mongo --host mongodb-dev.practicaldevops.online </app/schema/${component}.js &>>${log}
-    status_check
+      print_head "Installing mongo client"
+      yum install mongodb-org-shell -y &>>${log}
+      status_check
+
+      print_head "load schema"
+      mongo --host mongodb-dev.practicaldevops.online </app/schema/${component}.js &>>${log}
+      status_check
+    fi
+
+    if [ ${schema_type} == "mysql" ]; then
+      print_head "Installing mysql client"
+      yum install mysql -y &>>${log}
+      status_check
+
+      print_head "load schema"
+      mysql -h mysql-dev.practicaldevops.online -uroot -p${root_mysql_password} < /app/schema/shipping.sql  &>>${log}
+      status_check
+    fi
   fi
 }
 
