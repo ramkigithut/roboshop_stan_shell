@@ -35,7 +35,7 @@ app_prerequisites() {
   rm -rf /app/* &>>${log}
   status_check
 
-  print_head "CleaExtracting App Content"
+  print_head "CleanExtracting App Content"
   cd /app &>>${log}
   unzip /tmp/${component}.zip &>>${log}
   status_check
